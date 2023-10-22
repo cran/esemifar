@@ -1,4 +1,4 @@
-#' Plot Method for the Package 'smoots'
+#' Plot Method for the Package 'esemifar'
 #'
 #'This function regulates how objects created by the package \code{esemifar} are
 #'plotted.
@@ -25,14 +25,11 @@
 
 plot.esemifar <- function(x, t = NULL, ...) {
 
-  #  oldpar <- par(no.readonly = TRUE)  # old version
-  #  par(mfrow = c(1, 1))
-  #  on.exit(par(oldpar))
   dots <- list(...)
   dots[["x"]] <- t
   dots[["y"]] <- x
   if (attr(dots$y, "function") == "tsmoothlm") {
-    cat("Plot choices for smoots object:", fill = TRUE)
+    cat("Plot choices for esemifar object:", fill = TRUE)
     choices <- c(1, 2, 3, 4)
     choice_names <- c("Original series:", "Trend series:", "Residual series:",
                       "Original with trend series:")

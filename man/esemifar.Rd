@@ -3,6 +3,7 @@
 \docType{package}
 \name{esemifar}
 \alias{esemifar}
+\alias{esemifar-package}
 \title{esemifar: A package for data-driven nonparametric estimation of the trend and
 its derivatives in equidistant time series.}
 \description{
@@ -70,8 +71,7 @@ model with application in R. Discussion Paper. Paderborn University.
 \item Yuanhua Feng (Department of Economics, Paderborn University), \cr
 Author of the Algorithms \cr
 Website: \url{https://wiwi.uni-paderborn.de/en/dep4/feng/}
-\item Sebastian Letmathe (Scientific Employee) (Department of Economics,
-Paderborn University), \cr
+\item Sebastian Letmathe, \cr
 Package Creator and Maintainer
 }
 }

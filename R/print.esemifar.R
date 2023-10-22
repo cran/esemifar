@@ -19,7 +19,7 @@
 #'}
 
 
-# Print function for the R package 'smoots'-------------------------------
+# Print function for the R package 'esemifar'-------------------------------
 print.esemifar <- function(x, ...) {
   if (attr(x, "function") == "tsmoothlm") {
     if (attr(x, "method") == "lpr") {

@@ -2,7 +2,7 @@
 % Please edit documentation in R/plot.esemifar.R
 \name{plot.esemifar}
 \alias{plot.esemifar}
-\title{Plot Method for the Package 'smoots'}
+\title{Plot Method for the Package 'esemifar'}
 \usage{
 \method{plot}{esemifar}(x, t = NULL, ...)
 }

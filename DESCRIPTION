@@ -1,7 +1,7 @@
 Package: esemifar
 Type: Package
 Title: Smoothing Long-Memory Time Series
-Version: 1.0.1
+Version: 1.0.2
 Description: The nonparametric trend and its derivatives in equidistant time 
     series (TS) with long-memory errors can be estimated. The 
     estimation is conducted via local polynomial regression using an 
@@ -27,13 +27,13 @@ Authors@R:
 URL: https://wiwi.uni-paderborn.de/en/dep4/feng/
 Acknowledgments: This work was supported by the German DFG project
         GZ-FE-1500-2-1.
-RoxygenNote: 7.1.1
+RoxygenNote: 7.2.3
 NeedsCompilation: no
-Packaged: 2021-11-06 10:10:54 UTC; Letmode
+Packaged: 2023-10-22 07:44:32 UTC; Letmode
 Author: Yuanhua Feng [aut] (Paderborn University, Germany),
   Jan Beran [aut] (University of Konstanz, Germany),
   Sebastian Letmathe [aut, cre] (Paderborn University, Germany),
   Dominik Schulz [aut] (Paderborn University, Germany)
 Maintainer: Sebastian Letmathe <sebastian.letmathe@uni-paderborn.de>
 Repository: CRAN
-Date/Publication: 2021-11-06 10:20:02 UTC
+Date/Publication: 2023-10-22 08:00:02 UTC

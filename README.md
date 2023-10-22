@@ -4,6 +4,11 @@
 # esemifar
 
 <!-- badges: start -->
+
+[![CRAN
+status](https://www.r-pkg.org/badges/version/esemifar)](https://CRAN.R-project.org/package=esemifar)
+[![Lifecycle:
+stable](https://img.shields.io/badge/lifecycle-stable-brightgreen.svg)](https://lifecycle.r-lib.org/articles/stages.html#stable)
 <!-- badges: end -->
 
 The goal of `esemifar` is to provide an easy way to estimate the
@@ -76,11 +81,12 @@ In `esemifar` three functions are available.
 
 -   `dsmoothlm`: Data-driven Local Polynomial for the Trend’s
     Derivatives in Equidistant Time Series
+-   `critMatlm`: FARIMA Order Selection Matrix
 -   `tsmoothlm`: Advanced Data-driven Nonparametric Regression for the
     Trend in Equidistant Time Series
--   `critMatlm`: FARIMA Order Selection Matrix
 
 **Data Sets**
 
-*`airLDN`: Daily observations of individual air pollutants from 2014 to
-202 *`gdpG7`: Quarterly G7 GDP between Q1 1962 and Q4 2019
+-   `airLDN`: Daily observations of individual air pollutants from 2014
+    to 2020
+-   `gdpG7`: Quarterly G7 GDP between Q1 1962 and Q4 2019
