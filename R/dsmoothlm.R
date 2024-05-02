@@ -234,6 +234,11 @@ dsmoothlm <- function(y,
          "bStart.p > 0.")
   }
 
+  # if (!length(method_error) %in% c(1, 2) || !all(!is.na(method_error)) ||
+  #     !is.character(method_error)) {
+  #   stop("The argument 'method_error' must be a single non-NA character value.")
+  # }
+
   if (all(d == c(1, 2))) d <- 1
   if (all(mu == c(0, 1, 2, 3))) mu <- 1
   if (all(mu.p == c(0, 1, 2, 3))) mu.p <- 1
@@ -243,6 +248,7 @@ dsmoothlm <- function(y,
   if (all(qmin == c(0, 1, 2, 3, 4, 5))) qmin <- 0
   if (all(qmax == c(0, 1, 2, 3, 4, 5))) pmax <- 0
   if (all(InfR.p == c("Opt", "Nai", "Var"))) InfR.p <- "Opt"
+  # if (all(method_error == c("fracdiff", "arfima"))) method_error <- "fracdiff"
 
 
   if (!(d %in% c(1, 2))) {
@@ -271,6 +277,10 @@ dsmoothlm <- function(y,
   if (!(pp %in% c(1, 3))) {
     stop("Input of argument 'pp' incorrect. It must be set to either 1 or 3.")
   }
+
+  # if (length(method_error) != 1 || !(method_error %in% c("fracdiff", "arfima"))) {
+  #   stop("Input of argument 'method_error' incorrect. Method not recognized.")
+  # }
 
   result.p <- tsmoothlmCalc(y, qmin = qmin, qmax = qmax, pmin = pmin,
                             pmax = pmax, p = pp, mu = mu.p, InfR = InfR.p,

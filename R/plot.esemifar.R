@@ -7,6 +7,12 @@
 #'@param t an optional vector with time points that will be considered for
 #'the x-axis within the plot; is set to NULL by default and uses a vector
 #'\code{1:length(x$ye)} for time points.
+#'@param rescale a single logical value; is set to \code{TRUE} by default;
+#'if the output of a derivative estimation process is passed to \code{x} and if
+#'\code{rescale = TRUE}, the estimates will be rescaled according to \code{t}.
+#'@param which one of 1 (observations), 2 (trend), 3 (residuals) or 4
+#'(observations with trend); the default \code{NULL} starts an interactive
+#'selection via the console.
 #'@param ... additional arguments of the standard plot method.
 #'
 #'@export
@@ -23,22 +29,29 @@
 #'}
 #'
 
-plot.esemifar <- function(x, t = NULL, ...) {
+plot.esemifar <- function(x, t = NULL, rescale = TRUE, which = NULL, ...) {
 
   dots <- list(...)
   dots[["x"]] <- t
   dots[["y"]] <- x
   if (attr(dots$y, "function") == "tsmoothlm") {
-    cat("Plot choices for esemifar object:", fill = TRUE)
-    choices <- c(1, 2, 3, 4)
-    choice_names <- c("Original series:", "Trend series:", "Residual series:",
-                      "Original with trend series:")
-    choices_df <- data.frame(choices)
-    colnames(choices_df) <- ""
-    rownames(choices_df) <- choice_names
-    print.data.frame(choices_df)
-    plot_choice <- readline(prompt="Please enter the corresponding number: ")
-    plot_choice <- as.numeric(plot_choice)
+
+    plot_choice <- which
+
+    if (is.null(plot_choice)) {
+
+      cat("Plot choices for esemifar object:", fill = TRUE)
+      choices <- c(1, 2, 3, 4)
+      choice_names <- c("Original series:", "Trend series:", "Residual series:",
+                        "Original with trend series:")
+      choices_df <- data.frame(choices)
+      colnames(choices_df) <- ""
+      rownames(choices_df) <- choice_names
+      print.data.frame(choices_df)
+      plot_choice <- readline(prompt="Please enter the corresponding number: ")
+      plot_choice <- as.numeric(plot_choice)
+
+    }
 
     if (plot_choice == 1) {
       if (is.null(dots[["main"]])) {
@@ -169,17 +182,25 @@ plot.esemifar <- function(x, t = NULL, ...) {
       lines(dots[["x"]], ye, col = "red")
 
     }
-  } else if (attr(dots[["y"]], "function") == "dsmoothlm") {
+  } else if (attr(dots[["y"]], "function") == "dsmoothlm" |
+             (attr(dots[["y"]], "function") == "gsmooth" &&
+              dots[["y"]]$v > 0)) {
 
-    cat("Plot choices for smoots object:", fill = TRUE)
-    choices <- c(1, 2)
-    choice_names <- c("Original series:", "Derivative series:")
-    choices_df <- data.frame(choices)
-    colnames(choices_df) <- ""
-    rownames(choices_df) <- choice_names
-    print.data.frame(choices_df)
-    plot_choice <- readline(prompt="Please enter the corresponding number: ")
-    plot_choice <- as.numeric(plot_choice)
+    plot_choice <- which
+
+    if (is.null(plot_choice)) {
+
+      cat("Plot choices for smoots object:", fill = TRUE)
+      choices <- c(1, 2)
+      choice_names <- c("Original series:", "Derivative series:")
+      choices_df <- data.frame(choices)
+      colnames(choices_df) <- ""
+      rownames(choices_df) <- choice_names
+      print.data.frame(choices_df)
+      plot_choice <- readline(prompt="Please enter the corresponding number: ")
+      plot_choice <- as.numeric(plot_choice)
+
+    }
 
     if (plot_choice == 1) {
       if (is.null(dots[["main"]])) {
@@ -236,6 +257,11 @@ plot.esemifar <- function(x, t = NULL, ...) {
       n <- length(dots[["y"]])
       if (is.null(dots[["x"]])) {
         dots[["x"]] <- 1:n
+      }
+
+      if (rescale == TRUE) {
+        v <- x[["v"]]
+        dots[["y"]] <- smoots::rescale(dots[["y"]], x = dots[["x"]], v = v)
       }
 
       if (is.null(dots[["xlim"]])) {

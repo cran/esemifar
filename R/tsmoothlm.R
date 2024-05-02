@@ -138,7 +138,7 @@
 #'\item{FARIMA.BIC}{the Bayesian Information Criterion of the optimal
 #'FARIMA(\eqn{p,d,q}) model.}
 #'\item{cb}{the percentage of omitted observations on each side of the
-#'observation period; always equal to 0.05.}
+#'observation period.}
 #'\item{b0}{the optimal bandwidth chosen by the IPI-algorithm.}
 #'\item{bb}{the boundary bandwidth method used within the IPI; always equal to
 #'1.}
@@ -216,6 +216,9 @@
 #'Paderborn University), \cr
 #'Author
 #'}
+#'
+#'@importFrom Rcpp cppFunction
+#'@useDynLib esemifar
 #'
 #'@examples
 #'
@@ -303,11 +306,17 @@ tsmoothlm <- function(y,
     stop("The argument 'method' must be a single non-NA character value.")
   }
 
+  # if (!length(method_error) %in% c(1, 2) || !all(!is.na(method_error)) ||
+  #     !is.character(method_error)) {
+  #   stop("The argument 'method_error' must be a single non-NA character value.")
+  # }
+
 
   if (all(mu == c(0, 1, 2, 3))) mu <- 1
   if (all(InfR == c("Opt", "Nai", "Var"))) InfR <- "Opt"
   if (all(bb == c(0, 1))) bb <- 1
   if (all(method == c("lpr", "kr"))) method <- "lpr"
+  # if (all(method_error == c("fracdiff", "arfima"))) method_error <- "fracdiff"
   if (all(p == c(1, 3)) || method == "kr") p <- 1
   if (all(pmin == c(0, 1, 2, 3, 4, 5))) pmin <- 0
   if (all(pmax == c(0, 1, 2, 3, 4, 5))) pmax <- 0
@@ -349,6 +358,9 @@ tsmoothlm <- function(y,
   if (length(method) != 1 || !(method %in% c("lpr", "kr"))) {
     stop("Input of argument 'method' incorrect. Method not recognized.")
   }
+  # if (length(method_error) != 1 || !(method_error %in% c("fracdiff", "arfima"))) {
+  #   stop("Input of argument 'method_error' incorrect. Method not recognized.")
+  # }
 
   results <- tsmoothlmCalc(y = y, p = p, pmin = pmin, pmax = pmax, qmin = qmin,
                            qmax = qmax, mu = mu, InfR = InfR, bStart = bStart,
@@ -356,6 +368,7 @@ tsmoothlm <- function(y,
 
   class(results) <- "esemifar"
   attr(results, "function") <- "tsmoothlm"
+  attr(results, "type") <- "tsmoothlm"
   results
 }
 # End of the function

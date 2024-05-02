@@ -1,7 +1,7 @@
 Package: esemifar
 Type: Package
 Title: Smoothing Long-Memory Time Series
-Version: 1.0.2
+Version: 2.0.0
 Description: The nonparametric trend and its derivatives in equidistant time 
     series (TS) with long-memory errors can be estimated. The 
     estimation is conducted via local polynomial regression using an 
@@ -12,28 +12,30 @@ Description: The nonparametric trend and its derivatives in equidistant time
 License: GPL-3
 Encoding: UTF-8
 LazyData: true
-Imports: fracdiff, stats, smoots, graphics, grDevices
+Imports: fracdiff, stats, utils, smoots, graphics, grDevices, Rcpp,
+        future, furrr, ggplot2
 Depends: R (>= 2.10)
+LinkingTo: Rcpp, RcppArmadillo
 Authors@R: 
   c(person("Yuanhua", "Feng", role = "aut", 
     comment = "Paderborn University, Germany"),
     person("Jan", "Beran", role = "aut", 
     comment = "University of Konstanz, Germany"),
-  person("Sebastian", "Letmathe", role = c("aut", "cre"),
-    email = "sebastian.letmathe@uni-paderborn.de",
+  person("Sebastian", "Letmathe", role = c("aut"),
     comment = "Paderborn University, Germany"),
-  person("Dominik", "Schulz", role = c("aut"), 
+  person("Dominik", "Schulz", role = c("aut", "cre"), 
+    email = "dominik.schulz@uni-paderborn.de",
     comment = "Paderborn University, Germany"))
 URL: https://wiwi.uni-paderborn.de/en/dep4/feng/
 Acknowledgments: This work was supported by the German DFG project
         GZ-FE-1500-2-1.
 RoxygenNote: 7.2.3
-NeedsCompilation: no
-Packaged: 2023-10-22 07:44:32 UTC; Letmode
+NeedsCompilation: yes
+Packaged: 2024-05-02 10:01:20 UTC; Dominik Schulz
 Author: Yuanhua Feng [aut] (Paderborn University, Germany),
   Jan Beran [aut] (University of Konstanz, Germany),
-  Sebastian Letmathe [aut, cre] (Paderborn University, Germany),
-  Dominik Schulz [aut] (Paderborn University, Germany)
-Maintainer: Sebastian Letmathe <sebastian.letmathe@uni-paderborn.de>
+  Sebastian Letmathe [aut] (Paderborn University, Germany),
+  Dominik Schulz [aut, cre] (Paderborn University, Germany)
+Maintainer: Dominik Schulz <dominik.schulz@uni-paderborn.de>
 Repository: CRAN
-Date/Publication: 2023-10-22 08:00:02 UTC
+Date/Publication: 2024-05-02 14:12:38 UTC

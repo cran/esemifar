@@ -105,7 +105,7 @@ The function returns a list with different components:
 \item{FARIMA.BIC}{the Bayesian Information Criterion of the optimal
 FARIMA(\eqn{p,d,q}) model.}
 \item{cb}{the percentage of omitted observations on each side of the
-observation period; always equal to 0.05.}
+observation period.}
 \item{b0}{the optimal bandwidth chosen by the IPI-algorithm.}
 \item{bb}{the boundary bandwidth method used within the IPI; always equal to
 1.}

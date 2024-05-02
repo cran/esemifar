@@ -121,6 +121,8 @@ print.esemifar <- function(x, ...) {
       print.data.frame(data.frame(bandwidth = sprintf("%.4f", x$iterations),
                                   row.names = it.names))
 
+    } else {
+      print.default(x)
     }
   } else if(attr(x, "function") == "dsmoothlm") {
     cat("------------------------------------------------------",
