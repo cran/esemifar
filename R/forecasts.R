@@ -230,8 +230,14 @@ predict.esemifar <- function(object, n.ahead = 5, alpha = c(0.95, 0.99),
   }
   mean_obs <- mean(resids)
 
+  fc_const <- switch(
+    trend_extrap,
+    "constant" = 0,
+    "linear" = 1
+  )
+
   trend_step <- diff(tail(trend, 2))
-  trend.fc <- tail(trend, 1) + (1:n.ahead) * trend_step
+  trend.fc <- tail(trend, 1) + fc_const * (1:n.ahead) * trend_step
 
   p <- length(farima$ar)
   q <- length(farima$ma)

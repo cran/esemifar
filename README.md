@@ -52,7 +52,7 @@ b.opt <- results$b0             # The optimal bandwidth
 trend <- results$ye             # The trend estimates  
 resid <- results$res            # The residuals
 b.opt
-#> [1] 0.2423177
+#> [1] 0.2422682
 coef(results$FARMA.BIC)         # The model parameters
 #>         d        ar 
 #> 0.1032687 0.5435804
@@ -60,18 +60,70 @@ coef(results$FARMA.BIC)         # The model parameters
 
 <img src="man/figures/README-plot1-1.png" width="100%" /><img src="man/figures/README-plot1-2.png" width="100%" />
 
-An optimal bandwidth of 0.2423177 was selected by the iterative plug-in
-algorithm (IPI) within `tsmoothlm()`. A FARIMA (1, *d*, 0) was obtained
-from the trend-adjusted residuals with *d̂* = 0.1032687 and
-*ϕ̂* = 0.5435804. Moreover, the estimated trend fits the data suitably
-and the residuals seem to be stationary.
+An optimal bandwidth of $0.2422682$ was selected by the iterative
+plug-in algorithm (IPI) within `tsmoothlm()`. A FARIMA ($1, d, 0$) was
+obtained from the trend-adjusted residuals with $\hat{d} = 0.1032687$
+and $\hat{\phi} = 0.5435804$. Moreover, the estimated trend fits the
+data suitably and the residuals seem to be stationary.
+
+## Example 2: Forecasting capabilities
+
+The trend estimation in combination with a fitted FARIMA model for the
+trend-adjusted values as in Example 1 is an ESEMIFAR model. With version
+2.0.0 of the package, forecasting for based on such fitted ESEMIFAR
+models can be conducted using a designated predict-method. When applying
+that method, the user has the option between forecasting intervals based
+on the normality assumption for the innovations or based on a bootstrap.
+
+``` r
+h <- 200
+
+# Via a bootstrap
+set.seed(123)
+fc <- predict(results, n.ahead = h, method = "boot")
+head(fc$mean, 2)
+#> [1] 4.135976 3.995659
+head(fc$lower, 2)
+#>           95%      99%
+#> [1,] 3.725928 3.534129
+#> [2,] 3.510523 3.330463
+head(fc$upper, 2)
+#>           95%      99%
+#> [1,] 4.589879 4.749304
+#> [2,] 4.531115 4.723409
+
+# Under normality
+fc <- predict(results, n.ahead = h, method = "norm")
+head(fc$mean, 2)
+#> [1] 4.135976 3.995659
+head(fc$lower, 2)
+#>           95%      99%
+#> [1,] 3.717548 3.586068
+#> [2,] 3.497323 3.340734
+head(fc$upper, 2)
+#>           95%      99%
+#> [1,] 4.554404 4.685883
+#> [2,] 4.493994 4.650583
+```
+
+Moreover, a quick plot of the results can be generated using a
+designated plot-method.
+
+``` r
+t_step <- diff(tail(t, 2))
+t2 <- c(t, seq(from = tail(t, 1) + t_step, by = t_step, length.out = h))
+plot(fc, t = t2, xlab = "Year", ylab = "AQI",
+     main = "Point forecasts with 95%- and 99%-forecasting intervals")
+```
+
+<img src="man/figures/README-plot2-1.png" width="100%" />
 
 ## Further applications
 
 The trend estimation function can also be used for the implementation of
 semiparametric generalized autoregressive conditional heteroskedasticity
 (Semi-GARCH) models with long memory in Financial Econometrics (see
-Letmathe et al., 2021).
+Letmathe et al., 2023).
 
 ## Functions
 
@@ -79,14 +131,24 @@ In `esemifar` three functions are available.
 
 **Original functions since version 1.0.0:**
 
--   `dsmoothlm`: Data-driven Local Polynomial for the Trend’s
-    Derivatives in Equidistant Time Series
--   `critMatlm`: FARIMA Order Selection Matrix
--   `tsmoothlm`: Advanced Data-driven Nonparametric Regression for the
-    Trend in Equidistant Time Series
+- `dsmoothlm`: Data-driven Local Polynomial for the Trend’s Derivatives
+  in Equidistant Time Series
+- `critMatlm`: FARIMA Order Selection Matrix
+- `tsmoothlm`: Advanced Data-driven Nonparametric Regression for the
+  Trend in Equidistant Time Series
 
-**Data Sets**
+**Original functions since version 2.0.0:**
 
--   `airLDN`: Daily observations of individual air pollutants from 2014
-    to 2020
--   `gdpG7`: Quarterly G7 GDP between Q1 1962 and Q4 2019
+- `predict.esemifar`: ESEMIFAR Prediction Method
+- `arma_to_ma`: MA Representation of an ARMA Model
+- `arma_to_ar`: AR Representation of an ARMA Model
+- `d_to_coef`: Filter Coefficients of the Fractional Differencing
+  Operator
+- `farima_to_ma`: MA Representation of a FARIMA Model
+- `farima_to_ar`: AR Representation of a FARIMA Model
+
+## Data sets
+
+- `airLDN`: Daily observations of individual air pollutants from 2014 to
+  2020
+- `gdpG7`: Quarterly G7 GDP between Q1 1962 and Q4 2019

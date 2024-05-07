@@ -98,8 +98,9 @@ Beran, J. and Feng, Y. (2002c). SEMIFAR models - a semiparametric approach
 to modelling trends, longrange dependence and nonstationarity. Computational
 Statistics & Data Analysis 40(2), 393-419.
 
-Letmathe, S., Beran, J. and Feng, Y. (2021). An extended exponential SEMIFAR
-model with application in R. Discussion Paper. Paderborn University.
+Letmathe, S., Beran, J. and Feng, Y. (2023). An extended exponential SEMIFAR
+model with application in R. Communications in Statistics - Theory and Methods:
+1-13.
 }
 \author{
 \itemize{
@@ -107,7 +108,9 @@ model with application in R. Discussion Paper. Paderborn University.
 Author of the Algorithms \cr
 Website: \url{https://wiwi.uni-paderborn.de/en/dep4/feng/}
 \item Sebastian Letmathe, \cr
-Package Creator and Maintainer
+Author (and Original Package Creator and Maintainer)
+\item Dominik Schulz, \cr
+Author and Current Package Creator and Maintainer
 }
 
 \itemize{

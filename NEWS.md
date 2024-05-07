@@ -1,3 +1,14 @@
+# esemifar 2.0.1
+- a bug in the predict-method was fixed that did not implement the constant
+  extrapolation of the trend for `trend_extrap = "constant"`.
+- a minor bug in the handling of the residual mean when forecasting was corrected.  
+- the README was updated to show examples for the new forecasting approach.
+- the main literature in the manual was updated to the by now officially
+  published paper.
+- a link to the package 'RcppArmadillo' was removed in the manual, as it 
+  caused a NOTE on some operating systems.
+
+
 # esemifar 2.0.0
 - predict-method added for output of 'tsmoothlm()' that allows for point
   and interval forecasts (under normality or via bootstrap) based on ESEMIFAR

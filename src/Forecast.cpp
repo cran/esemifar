@@ -4,7 +4,7 @@ using namespace Rcpp;
 
 
 // [[Rcpp::export]]
-arma::vec FARIMAforecastAR(arma::vec& obs, const arma::rowvec& ar_inf, const int meanObs, const int m) {
+arma::vec FARIMAforecastAR(arma::vec& obs, const arma::rowvec& ar_inf, const double meanObs, const int m) {
 
   const int n = obs.size();
 

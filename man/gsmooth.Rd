@@ -133,7 +133,7 @@ package.
 
 With package version 1.1.0, this function implements C++ code by means
 of the \code{\link[Rcpp:Rcpp-package]{Rcpp}} and
-\code{\link[RcppArmadillo:RcppArmadillo-package]{RcppArmadillo}} packages for
+\code{RcppArmadillo} packages for
 better performance.
 }
 \examples{

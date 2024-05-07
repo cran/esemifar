@@ -140,7 +140,7 @@ the time series' nonparametric trend (\eqn{\nu = 0}) with polynomial order
 \eqn{p_p}. The estimate is then plugged into the iterative procedure for
 estimating the first or second derivative (\eqn{\nu = 1} or \eqn{\nu = 2}).
 For further details on the asymptotic theory or the algorithm, we refer the
-user to Letmathe, Beran and Feng (2021).
+user to Letmathe, Beran and Feng (2023).
 
 The function itself is applicable in the following way: Based on a data input
 \code{y}, an order of polynomial \code{pp} for the variance factor estimation
@@ -194,8 +194,9 @@ result_d
 # The main function "dsmoothlm"------------------------------------------
 }
 \references{
-Letmathe, S., Beran, J. and Feng, Y. (2021). An extended exponential SEMIFAR
-model with application in R. Discussion Paper. Paderborn University.
+Letmathe, S., Beran, J. and Feng, Y. (2023). An extended exponential SEMIFAR
+model with application in R. Communications in Statistics - Theory and Methods:
+1-13.
 }
 \author{
 \itemize{

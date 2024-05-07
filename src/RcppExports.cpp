@@ -12,21 +12,21 @@ Rcpp::Rostream<false>& Rcpp::Rcerr = Rcpp::Rcpp_cerr_get();
 #endif
 
 // FARIMAforecastAR
-arma::vec FARIMAforecastAR(arma::vec& obs, const arma::rowvec& ar_inf, const int meanObs, const int m);
+arma::vec FARIMAforecastAR(arma::vec& obs, const arma::rowvec& ar_inf, const double meanObs, const int m);
 RcppExport SEXP _esemifar_FARIMAforecastAR(SEXP obsSEXP, SEXP ar_infSEXP, SEXP meanObsSEXP, SEXP mSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< arma::vec& >::type obs(obsSEXP);
     Rcpp::traits::input_parameter< const arma::rowvec& >::type ar_inf(ar_infSEXP);
-    Rcpp::traits::input_parameter< const int >::type meanObs(meanObsSEXP);
+    Rcpp::traits::input_parameter< const double >::type meanObs(meanObsSEXP);
     Rcpp::traits::input_parameter< const int >::type m(mSEXP);
     rcpp_result_gen = Rcpp::wrap(FARIMAforecastAR(obs, ar_inf, meanObs, m));
     return rcpp_result_gen;
 END_RCPP
 }
 // FARIMAfutureObs
-arma::vec FARIMAfutureObs(arma::vec& obs, const arma::rowvec& ar_inf, const arma::vec& et, const int meanObs);
+arma::vec FARIMAfutureObs(arma::vec& obs, const arma::rowvec& ar_inf, const arma::vec& et, const double meanObs);
 RcppExport SEXP _esemifar_FARIMAfutureObs(SEXP obsSEXP, SEXP ar_infSEXP, SEXP etSEXP, SEXP meanObsSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
@@ -34,7 +34,7 @@ BEGIN_RCPP
     Rcpp::traits::input_parameter< arma::vec& >::type obs(obsSEXP);
     Rcpp::traits::input_parameter< const arma::rowvec& >::type ar_inf(ar_infSEXP);
     Rcpp::traits::input_parameter< const arma::vec& >::type et(etSEXP);
-    Rcpp::traits::input_parameter< const int >::type meanObs(meanObsSEXP);
+    Rcpp::traits::input_parameter< const double >::type meanObs(meanObsSEXP);
     rcpp_result_gen = Rcpp::wrap(FARIMAfutureObs(obs, ar_inf, et, meanObs));
     return rcpp_result_gen;
 END_RCPP

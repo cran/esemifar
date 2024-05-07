@@ -181,7 +181,7 @@ iteration, a bandwidth is obtained in accordance with the AMISE that once
 more serves as an input for the following iteration. The process repeats
 until either convergence or the 40th iteration is reached. For further
 details on the asymptotic theory or the algorithm, please see Letmathe et
-al., 2021.
+al., 2023.
 
 To apply the function, the following arguments are needed: a data input
 \code{y}, an order of polynomial \code{p}, a kernel weighting function
@@ -258,8 +258,9 @@ Beran, J. and Feng, Y. (2002c). SEMIFAR models - a semiparametric approach
 to modelling trends, longrange dependence and nonstationarity. Computational
 Statistics & Data Analysis 40(2), 393-419.
 
-Letmathe, S., Beran, J. and Feng, Y. (2021). An extended exponential SEMIFAR
-model with application in R. Discussion Paper. Paderborn University.
+Letmathe, S., Beran, J. and Feng, Y. (2023). An extended exponential SEMIFAR
+model with application in R. Communications in Statistics - Theory and Methods:
+1-13.
 }
 \author{
 \itemize{
