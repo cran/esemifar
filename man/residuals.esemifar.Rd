@@ -20,7 +20,7 @@ object. Both \code{residuals} and its abbreviated form \code{resid} can be calle
 }
 \author{
 \itemize{
-\item Sebastian Letmathe (Scientific Employee) (Department of Economics,
+\item Sebastian Letmathe (formerly Department of Economics,
 Paderborn University), \cr
 }
 }

@@ -143,8 +143,7 @@
 #'\itemize{
 #'\item Yuanhua Feng (Department of Economics, Paderborn University), \cr
 #'Author of the Algorithms \cr
-#'Website: \url{https://wiwi.uni-paderborn.de/en/dep4/feng/}
-#'\item Dominik Schulz (Research Assistant) (Department of Economics, Paderborn
+#'\item Dominik Schulz (formerly Department of Economics, Paderborn
 #'University), \cr
 #'Package Creator and Maintainer
 #'}

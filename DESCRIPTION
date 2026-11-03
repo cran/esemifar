@@ -1,7 +1,7 @@
 Package: esemifar
 Type: Package
 Title: Smoothing Long-Memory Time Series
-Version: 2.0.1
+Version: 2.0.2
 Description: The nonparametric trend and its derivatives in equidistant time 
     series (TS) with long-memory errors can be estimated. The 
     estimation is conducted via local polynomial regression using an 
@@ -22,20 +22,19 @@ Authors@R:
     person("Jan", "Beran", role = "aut", 
     comment = "University of Konstanz, Germany"),
   person("Sebastian", "Letmathe", role = c("aut"),
-    comment = "Paderborn University, Germany"),
+    comment = "formerly Paderborn University, Germany"),
   person("Dominik", "Schulz", role = c("aut", "cre"), 
-    email = "dominik.schulz@uni-paderborn.de",
-    comment = "Paderborn University, Germany"))
-URL: https://wiwi.uni-paderborn.de/en/dep4/feng/
+    email = "dominik.schulz.r@gmail.com",
+    comment = "formerly Paderborn University, Germany"))
 Acknowledgments: This work was supported by the German DFG project
         GZ-FE-1500-2-1.
-RoxygenNote: 7.2.3
+Config/roxygen2/version: 8.1.0
 NeedsCompilation: yes
-Packaged: 2024-05-07 10:12:01 UTC; Dominik Schulz
+Packaged: 2026-11-03 12:23:43 UTC; Dominik Schulz
 Author: Yuanhua Feng [aut] (Paderborn University, Germany),
   Jan Beran [aut] (University of Konstanz, Germany),
-  Sebastian Letmathe [aut] (Paderborn University, Germany),
-  Dominik Schulz [aut, cre] (Paderborn University, Germany)
-Maintainer: Dominik Schulz <dominik.schulz@uni-paderborn.de>
+  Sebastian Letmathe [aut] (formerly Paderborn University, Germany),
+  Dominik Schulz [aut, cre] (formerly Paderborn University, Germany)
+Maintainer: Dominik Schulz <dominik.schulz.r@gmail.com>
 Repository: CRAN
-Date/Publication: 2024-05-07 10:40:03 UTC
+Date/Publication: 2026-11-03 17:40:02 UTC

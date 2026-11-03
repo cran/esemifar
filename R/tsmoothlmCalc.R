@@ -22,6 +22,36 @@ tsmoothlmCalc <- function(y,
   steps <- rep(NA, 40)
   bd_func <- lookup$InfR_lookup[as.character(p), InfR][[1]]
 
+
+  # Some constants
+  m <- 1000000  # for the numerical integral
+  u <- (-m:m) / (m + 0.5)
+
+  if (p == 1) {
+    wkp <- (1 - u^2)^(mu)
+    lfun_intern <- lookup$p1p3_lookup[mu + 1, 1][[1]]
+    bopt_calc <- function(c1, c2, c3, d.BIC, n) {
+      bopt <- (c1 * c2 * c3)^(1 / (5 - 2 * d.BIC)) * n^((2 * d.BIC - 1)
+                                                        / (5 - 2 * d.BIC))
+      if (bopt < n^(-5 / 7)) {bopt <- n^(-5 / 7)}
+      bopt
+    }
+  } else if (p == 3) {
+    wkp <- lookup$p3_lookup[mu + 1][[1]](u)
+    lfun_intern <- lookup$p1p3_lookup[mu + 1, 2][[1]]
+    bopt_calc <- function(c1, c2, c3, d.BIC, n) {
+      bopt <- (c1 * c2 * c3)^(1 / (9 - 2 * d.BIC)) * n^((2 * d.BIC - 1)
+                                                        / (9 - 2*d.BIC))
+      if (bopt < n^(-9 / 11)) {bopt <- n^(-9 / 11)}
+      bopt
+    }
+  }
+  Rp_calc <- function(Vc, d.BIC) {
+    Vc * lfun_intern(d.BIC)
+  }
+  mukp <- sum((u^k) * wkp) / m ### beta
+  c1 <- factorial(k)^2 / (2 * k)  # a constant in the bandwidth
+
   # The main iteration------------------------------------------------------
 
   noi <- 40  # maximal number of iterations
@@ -53,42 +83,15 @@ tsmoothlmCalc <- function(y,
       yed <- smoots::gsmooth(y, k, pd, mu, bd, bb)$ye
 
       I2 <- sum(yed[max(1, n1):((1 - cb) * n)]^2) / (n - 2 * n1)
-
-      # New method for the kernel constants with p = 1 or 3
-      # Kernel constants
-      m <- 1000000  # for the numerical integral
-      u <- (-m:m) / (m + 0.5)
       Vc <- 2 * gamma(1 - 2 * d.BIC) * sin(pi * d.BIC) # Const. in the variance
-      # For p=1, any kernel in the given c-mu class is possible
-      if (p == 1) {
-        wkp <- (1 - u^2)^(mu)  # a standardization is not necessary
-        Rp <- Vc * lookup$p1p3_lookup[mu + 1, 1][[1]](d.BIC)
-      }
-
-      # For p=3, the four 4-th order kernels (Table 5.7, Mueller, 1988)
-      # table saved internally
-      if (p == 3) {  # the constant factor does not play any role
-        wkp <- lookup$p3_lookup[mu + 1][[1]](u)
-        Rp <- Vc * lookup$p1p3_lookup[mu + 1, 2][[1]](d.BIC)
-      }
-      mukp <- sum((u^k) * wkp) / m ### beta
+      Rp <- Rp_calc(Vc = Vc, d.BIC = d.BIC)
 
       # Three constants in the bandwidth
-      c1 <- factorial(k)^2 / (2 * k)
       c2 <- (1 - 2 * cb) * (1 - 2 * d.BIC) * Rp / (mukp)^2
       c3 <- cf0 / I2
 
-      if (p == 1) {
-        bopt <- (c1 * c2 * c3)^(1 / (5 - 2 * d.BIC)) * n^((2 * d.BIC - 1)
-                                                          / (5 - 2 * d.BIC))
-        if (bopt < n^(-5 / 7)) {bopt = n^(-5 / 7)}
-      }
-      if (p == 3) {
-        bopt <- (c1 * c2 * c3)^(1 / (9 - 2 * d.BIC)) * n^((2 * d.BIC - 1)
-                                                          / (9 - 2*d.BIC))
-        if (bopt < n^(-9 / 11)) {bopt = n^(-9 / 11)}
-      }
-      if (bopt > 0.49) {bopt = 0.49}
+      bopt <- bopt_calc(c1 = c1, c2 = c2, c3 = c3, d.BIC = d.BIC, n = n)
+      if (bopt > 0.49) {bopt <- 0.49}
       steps[i] <- bopt
       if (i > 2 && abs(bold - bopt) / bopt < 1 / n) {runc = 0}
       if (i > 3 && abs(bold1 - bopt) / bopt < 1 / n) {

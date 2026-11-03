@@ -60,14 +60,12 @@
 #'\itemize{
 #'\item Yuanhua Feng (Department of Economics, Paderborn University), \cr
 #'Author of the Algorithms \cr
-#'Website: \url{https://wiwi.uni-paderborn.de/en/dep4/feng/}
 #'\item Sebastian Letmathe, \cr
 #'Author (and Original Package Creator and Maintainer)
 #'\item Dominik Schulz, \cr
 #'Author and Current Package Creator and Maintainer
 #'}
 #'
-#' @docType package
-#' @name esemifar
-#' @aliases esemifar-package
-NULL
+#' @name esemifar-package
+#' @useDynLib esemifar
+"_PACKAGE"

@@ -1,3 +1,14 @@
+# esemifar 2.0.2
+- added optional bias adjustment of exponentiated point forecasts both under
+  normality and following a bootstrap (argument `biasadj` in the `predict`
+  method).
+- adjusted the default for `num_cores` in the `predict` method, so that it cannot
+  become smaller than 1.
+- some minor efficiency improvements in the main algorithm via `tsmoothlm()`
+  were implemented.
+- change in maintainer email address from dominik.schulz@uni-paderborn.de to
+  dominik.schulz.r@gmail.com; the maintainer is, however, still the same person.
+
 # esemifar 2.0.1
 - a bug in the predict-method was fixed that did not implement the constant
   extrapolation of the trend for `trend_extrap = "constant"`.

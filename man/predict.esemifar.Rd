@@ -16,7 +16,8 @@
   expo = FALSE,
   trend_extrap = c("linear", "constant"),
   future = TRUE,
-  num_cores = future::availableCores() - 1,
+  num_cores = max(future::availableCores() - 1, 1),
+  biasadj = TRUE,
   ...
 )
 }
@@ -58,6 +59,10 @@ for the bootstrap via the \code{future} framework?}
 \item{num_cores}{only for \code{method = "boot"} and \code{future = TRUE}:
 how many cores to use in the parallel programming.}
 
+\item{biasadj}{a logical value indicating whether or not to do a bias
+adjustment on the exponentiated point forecasts; the default is
+\code{expo = TRUE}.}
+
 \item{...}{no purpose; for compatibility only.}
 }
 \value{
@@ -96,7 +101,7 @@ fc$upper
 }
 \author{
 \itemize{
-\item Dominik Schulz (Scientific Employee) (Department of Economics,
+\item Dominik Schulz (formerly Department of Economics,
 Paderborn University), \cr
 Author
 }

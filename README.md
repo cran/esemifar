@@ -1,14 +1,15 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# esemifar
+# esemifar <img src="man/figures/logo_esemifar.png" align="right" height="139" alt="" />
 
 <!-- badges: start -->
 
-[![CRAN
-status](https://www.r-pkg.org/badges/version/esemifar)](https://CRAN.R-project.org/package=esemifar)
-[![Lifecycle:
-stable](https://img.shields.io/badge/lifecycle-stable-brightgreen.svg)](https://lifecycle.r-lib.org/articles/stages.html#stable)
+[![](https://www.r-pkg.org/badges/version/esemifar?color=green)](https://cran.r-project.org/package=esemifar)
+[![](http://cranlogs.r-pkg.org/badges/grand-total/esemifar?color=blue)](https://cran.r-project.org/package=esemifar)
+[![](http://cranlogs.r-pkg.org/badges/last-month/esemifar?color=green)](https://cran.r-project.org/package=esemifar)
+[![License:
+GPL-3](https://img.shields.io/badge/license-GPL--3-yellow.svg)](https://cran.r-project.org/web/licenses/GPL-3)
 <!-- badges: end -->
 
 The goal of `esemifar` is to provide an easy way to estimate the
@@ -58,7 +59,7 @@ coef(results$FARMA.BIC)         # The model parameters
 #> 0.1032687 0.5435804
 ```
 
-<img src="man/figures/README-plot1-1.png" width="100%" /><img src="man/figures/README-plot1-2.png" width="100%" />
+<img src="man/figures/README-plot1-1.png" alt="" width="100%" /><img src="man/figures/README-plot1-2.png" alt="" width="100%" />
 
 An optimal bandwidth of $0.2422682$ was selected by the iterative
 plug-in algorithm (IPI) within `tsmoothlm()`. A FARIMA ($1, d, 0$) was
@@ -110,13 +111,15 @@ Moreover, a quick plot of the results can be generated using a
 designated plot-method.
 
 ``` r
+n <- length(Yt)
+t <- ((1:n) / n) * 6 + 2014
 t_step <- diff(tail(t, 2))
 t2 <- c(t, seq(from = tail(t, 1) + t_step, by = t_step, length.out = h))
 plot(fc, t = t2, xlab = "Year", ylab = "AQI",
      main = "Point forecasts with 95%- and 99%-forecasting intervals")
 ```
 
-<img src="man/figures/README-plot2-1.png" width="100%" />
+<img src="man/figures/README-plot2-1.png" alt="" width="100%" />
 
 ## Further applications
 

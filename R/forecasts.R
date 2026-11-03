@@ -145,6 +145,9 @@ adv_boot_creator <- function(ar, ma, d, mean_v, et, obs, h, est_old) {
 #'for the bootstrap via the \code{future} framework?
 #'@param num_cores only for \code{method = "boot"} and \code{future = TRUE}:
 #'how many cores to use in the parallel programming.
+#'@param biasadj a logical value indicating whether or not to do a bias
+#'adjustment on the exponentiated point forecasts; the default is
+#'\code{expo = TRUE}.
 #'@param ... no purpose; for compatibility only.
 #'
 #'@details
@@ -161,7 +164,7 @@ adv_boot_creator <- function(ar, ma, d, mean_v, et, obs, h, est_old) {
 #'
 #'@author
 #'\itemize{
-#'\item Dominik Schulz (Scientific Employee) (Department of Economics,
+#'\item Dominik Schulz (formerly Department of Economics,
 #'Paderborn University), \cr
 #'Author
 #'}
@@ -194,7 +197,9 @@ predict.esemifar <- function(object, n.ahead = 5, alpha = c(0.95, 0.99),
                              expo = FALSE,
                              trend_extrap = c("linear", "constant"),
                              future = TRUE,
-                             num_cores = future::availableCores() - 1,...) {
+                             num_cores = max(future::availableCores() - 1, 1),
+                             biasadj = TRUE,
+                             ...) {
 
 
   stopifnot("Object cannot be used for prediction." = (inherits(object, "esemifar") & attr(object, "function") == "tsmoothlm"))
@@ -379,13 +384,29 @@ predict.esemifar <- function(object, n.ahead = 5, alpha = c(0.95, 0.99),
 
   y.fc_low <- c(trend.fc) + fc_low
   y.fc_up <- c(trend.fc) + fc_up
-  fitted <- trend + farima$fitted
+  #fitted <- trend + farima$fitted
 
   if (expo) {
-    y.fc <- exp(y.fc)
+    if (biasadj) {    # run bias adjustment on exponentiation of point forecasts
+      if (method == "norm") {
+        y.fc <- exp(y.fc + sd.fcast^2 / 2)
+      } else if (method == "boot") {
+        if (bootMethod == "simple") {
+          y.fc <- c(apply(
+            exp(c(trend.fc) + paths),
+            MARGIN = 1,
+            FUN = mean
+          ))
+        } else if (bootMethod == "advanced") {
+          y.fc <- c(apply(exp(t(predRoots) + y.fc), MARGIN = 1, mean))
+        }
+      }
+    } else {
+      y.fc <- exp(y.fc)
+    }
     y.fc_low <- exp(y.fc_low)
     y.fc_up <- exp(y.fc_up)
-    fitted <- exp(fitted)
+    #fitted <- exp(fitted)   # not needed
     x <- exp(x)
   }
 

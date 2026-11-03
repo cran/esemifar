@@ -18,12 +18,18 @@ export(gsmooth)
 export(tsmoothlm)
 importFrom(Rcpp,cppFunction)
 importFrom(fracdiff,fracdiff)
-importFrom(grDevices,col2rgb)
-importFrom(grDevices,colors)
+importFrom(grDevices,
+  col2rgb,
+  colors
+)
 importFrom(graphics,lines)
-importFrom(stats,AIC)
-importFrom(stats,BIC)
-importFrom(stats,qnorm)
-importFrom(utils,head)
-importFrom(utils,tail)
+importFrom(stats,
+  AIC,
+  BIC,
+  qnorm
+)
+importFrom(utils,
+  head,
+  tail
+)
 useDynLib(esemifar)
